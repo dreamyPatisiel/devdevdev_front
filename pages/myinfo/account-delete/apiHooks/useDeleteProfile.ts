@@ -20,7 +20,7 @@ export const useDeleteProfile = () => {
   return useMutation({
     mutationFn: deleteProfile,
     onSuccess: async () => {
-      localStorage.removeItem('accessToken');
+      localStorage.removeItem('userInfo');
       setLogoutStatus();
       await router.push('/account-delete-complete');
     },
