@@ -112,9 +112,18 @@ const useSetAxiosConfig = () => {
         originalRequest._retry = true; // 재시도 여부 플래그
         preToken = userInfo.accessToken;
         try {
-          await axios.post('/devdevdev/api/v1/token/refresh');
+          // 리프레시 요청을 위한 새로운 axios 인스턴스 생성
+          const refreshAxios = axios.create();
+          // 기존 인터셉터의 영향을 받지 않도록 별도 요청
+          await refreshAxios.post(`${URL}/devdevdev/api/v1/token/refresh`, {}, {
+            withCredentials: true 
+          });
 
           const getAccessToken = getCookie('DEVDEVDEV_ACCESS_TOKEN') as string;
+
+          if (!getAccessToken) {
+            throw new Error('Failed to get new access token');
+          }
 
           const updatedUserInfo = {
             accessToken: getAccessToken,
