@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const { withSentryConfig } = require('@sentry/nextjs');
+const fs = require('fs');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -17,6 +18,15 @@ const nextConfig = {
         permanent: true,
       },
     ];
+  },
+  devIndicators: {
+    autoPrerender: false,
+  },
+  server: {
+    https: {
+      key: fs.readFileSync('C:/Users/Minju/dev.devdevdev.co.kr-key.pem'),
+      cert: fs.readFileSync('C:/Users/Minju/dev.devdevdev.co.kr.pem'),
+    },
   },
 };
 

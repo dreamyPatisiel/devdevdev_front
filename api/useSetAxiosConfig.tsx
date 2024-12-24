@@ -112,19 +112,15 @@ const useSetAxiosConfig = () => {
         originalRequest._retry = true; // 재시도 여부 플래그
         preToken = userInfo.accessToken;
         try {
-          // 리프레시 요청을 위한 새로운 axios 인스턴스 생성
-          const refreshAxios = axios.create();
           // 기존 인터셉터의 영향을 받지 않도록 별도 요청
-          await refreshAxios.post(`${URL}/devdevdev/api/v1/token/refresh`, {}, {
-            withCredentials: true 
-          });
+          await axios.post(`${URL}/devdevdev/api/v1/token/refresh`);
 
           const getAccessToken = getCookie('DEVDEVDEV_ACCESS_TOKEN') as string;
 
           if (!getAccessToken) {
             throw new Error('Failed to get new access token');
           }
-
+          console.log('getAccessToken 새로운거! ', getAccessToken);
           const updatedUserInfo = {
             accessToken: getAccessToken,
             email: userInfo.email,
@@ -140,7 +136,14 @@ const useSetAxiosConfig = () => {
           originalRequest.headers['Authorization'] = `Bearer ${getAccessToken}`;
 
           // 상태 업데이트 후 재요청
-          return axios(originalRequest);
+          // 상태 업데이트 후 재요청
+          return axios({
+            ...originalRequest,
+            headers: {
+              ...originalRequest.headers,
+              Authorization: `Bearer ${getAccessToken}`, // 새로운 토큰으로 업데이트
+            },
+          }); // 수정된 부분
         } catch (tokenRefreshError: any) {
           Sentry.withScope((scope) => {
             scope.setContext('API Request Detail', {
