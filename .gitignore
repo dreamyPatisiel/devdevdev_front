@@ -36,3 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 certificates
+
+# pem값이 저장된 폴더
+certs

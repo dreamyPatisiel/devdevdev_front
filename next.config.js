@@ -2,6 +2,7 @@
 
 const { withSentryConfig } = require('@sentry/nextjs');
 const fs = require('fs');
+const path = require('path');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -24,8 +25,8 @@ const nextConfig = {
   },
   server: {
     https: {
-      key: fs.readFileSync('C:/Users/Minju/dev.devdevdev.co.kr-key.pem'),
-      cert: fs.readFileSync('C:/Users/Minju/dev.devdevdev.co.kr.pem'),
+      key: fs.readFileSync(path.join(__dirname, 'certs', 'local.dev.devdevdev.co.kr-key.pem')),
+      cert: fs.readFileSync(path.join(__dirname, 'certs', 'local.dev.devdevdev.co.kr.pem')),
     },
   },
 };
