@@ -6,7 +6,6 @@ import { useLoginStatusStore } from '@stores/loginStore';
 import { useLoginModalStore } from '@stores/modalStore';
 
 import useIsMobile from '@hooks/useIsMobile';
-import { useQaForm } from '@hooks/useQaForm';
 
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 
@@ -32,15 +31,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const isMobile = useIsMobile();
   const isShowMobile = isMobile && pathname === MAIN;
 
-  const {
-    showQaForm,
-    qaFormPosition,
-    setQaText,
-    setShowQaForm,
-    handledbContextMenu,
-    sendQaToSlack,
-  } = useQaForm();
-
   useEffect(() => {
     if (
       loginStatus === 'logout' &&
@@ -60,11 +50,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       {isMobile ? <MobileHeader /> : <Header />}
       <AuthModal />
       <QueryErrorBoundary>
-        <main
-          className='w-full mt-[4rem] mb-[8rem] max-w-[192rem] mx-auto'
-          onContextMenu={handledbContextMenu}
-          onClick={() => setShowQaForm(false)}
-        >
+        <main className='w-full mt-[4rem] mb-[8rem] max-w-[192rem] mx-auto'>
           <Toast />
           {isMobile ? <MobileTopBottomButton /> : <></>}
           {children}
@@ -73,13 +59,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         {(isShowMobile || !isMobile) && <Footer />}
       </QueryErrorBoundary>
 
-      {showQaForm && (
-        <QaForm
-          qaFormPosition={qaFormPosition}
-          setQaText={setQaText}
-          sendQaToSlack={sendQaToSlack}
-        />
-      )}
+      <QaForm />
     </div>
   );
 }

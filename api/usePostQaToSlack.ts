@@ -1,8 +1,8 @@
-import axios from 'axios';
-
 import { useMutation } from '@tanstack/react-query';
 
 import { slackConfig } from '@/config';
+
+import { slackAPI } from '@core/baseInstance';
 
 export interface ElementInfo {
   pathName: string;
@@ -17,18 +17,27 @@ interface PostQaToSlackProps {
   elementInfo: ElementInfo;
 }
 
+const createTitleBlock = (title: string) => ({
+  type: 'section',
+  text: {
+    type: 'mrkdwn',
+    text: `*${title}*`,
+  },
+});
+
 const createSlackBlock = (label: string, content: string) => ({
   type: 'section',
   text: {
     type: 'mrkdwn',
-    text: `*${label}*\n ${content}`,
+    text: `*\`${label}\`* : ${content}`,
   },
 });
 
 const postQaToSlack = async ({ qaText, elementInfo }: PostQaToSlackProps) => {
   const payload = {
-    text: '새로운 QA 발생!',
+    text: '📷  새로운 QA 발생!',
     blocks: JSON.stringify([
+      createTitleBlock('📷  새로운 QA 발생!'),
       createSlackBlock('QA 메시지', qaText),
       createSlackBlock('pathname', elementInfo.pathName),
       createSlackBlock('tagName', elementInfo.tagName),
@@ -38,7 +47,7 @@ const postQaToSlack = async ({ qaText, elementInfo }: PostQaToSlackProps) => {
     ]),
   };
 
-  const res = await axios({
+  const res = await slackAPI({
     method: 'post',
     url: slackConfig.webhookUrl,
     data: JSON.stringify(payload),
