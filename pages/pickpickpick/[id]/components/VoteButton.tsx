@@ -54,8 +54,10 @@ export default function VoteButton({ pickOptionData, dataIsVoted }: VoteButtonPr
       );
     }
 
-    const percentageColor = isPicked || optionIsPicked ? 'text-white' : 'text-gray100';
-    const voteCountColor = isPicked || optionIsPicked ? 'text-primary200' : 'text-gray200';
+    const isNotVotedOrPicked = !isPicked || !optionIsPicked;
+
+    const percentageColor = isNotVotedOrPicked ? 'text-gray100' : 'text-white';
+    const voteCountColor = isNotVotedOrPicked ? 'text-gray200' : 'text-primary200';
 
     return (
       <>
