@@ -8,12 +8,19 @@ import { useToastVisibleStore } from '@stores/toastVisibleStore';
 
 import useIsMobile from '@hooks/useIsMobile';
 
-import ErrorExclamationCircle from '@public/image/pickpickpick/exclamation-circle-red.svg';
-import ExclamationCircle from '@public/image/pickpickpick/exclamation-circle.svg';
+import ErrorExclamationCircle from '@public/image/exclamation-circle-red.svg';
+import ExclamationCircle from '@public/image/exclamation-circle.svg';
 
 export default function Toast() {
   const isMobile = useIsMobile();
-  const { isToastVisible, toastMessage, setToastInvisible, toastType } = useToastVisibleStore();
+  const {
+    isToastVisible,
+    toastMessage,
+    setToastInvisible,
+    toastType,
+    toastIcon,
+    toastMessageColor,
+  } = useToastVisibleStore();
 
   useEffect(() => {
     if (isToastVisible) {
@@ -39,16 +46,16 @@ export default function Toast() {
         <div className='flex items-center justify-center'>
           <div className={`${isMobile ? 'fixed' : 'fixed right-1/2 translate-x-1/2'} z-10`}>
             <div
-              className={`bg-gray1 ${isMobile ? 'px-[2.4rem] c1' : 'px-[4rem] p2'}  py-[1.6rem] rounded-[1.2rem] shadow-[0_2px_10px_0_rgba(0,0,0,0.35)]`}
+              className={`${isMobile ? 'px-[1.4rem]' : 'px-[2rem]'} bg-gray500 p1 py-[1rem] rounded-[1.2rem] shadow-[0_2px_10px_0_rgba(0,0,0,0.35)]`}
             >
               <p
-                className={`${toastType === 'error' ? 'text-red' : 'text-point1'}
-                text-point1 flex items-center gap-[1rem] font-bold`}
+                className={`${toastType === 'error' ? 'text-red200' : toastMessageColor ?? 'text-secondary400'}
+                flex items-center gap-[1.4rem] font-bold`}
               >
                 {toastType === 'error' ? (
                   <Image src={ErrorExclamationCircle} alt='토스트 에러 알림 아이콘' />
                 ) : (
-                  <Image src={ExclamationCircle} alt={'토스트 알림 아이콘'} />
+                  <Image src={toastIcon ?? ExclamationCircle} alt={'토스트 알림 아이콘'} />
                 )}
                 {toastMessage}
               </p>

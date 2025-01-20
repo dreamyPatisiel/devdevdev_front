@@ -45,7 +45,10 @@ const TechBlogImg: FC<TechBlogImgProps> = ({
       <Link href={`${ROUTES.TECH_BLOG}/${id}`}>
         {size === 'mobile' && isLogoImage ? (
           <div
-            className={cn(`${rounded} flex justify-center bg-gray1`, TechBlogImgVariants({ size }))}
+            className={cn(
+              `${rounded} flex justify-center bg-gray700`,
+              TechBlogImgVariants({ size }),
+            )}
           >
             <img
               className='w-[14.7rem] object-cover'
@@ -55,7 +58,7 @@ const TechBlogImg: FC<TechBlogImgProps> = ({
           </div>
         ) : (
           <img
-            className={cn(`${rounded} object-cover bg-gray1`, TechBlogImgVariants({ size }))}
+            className={cn(`${rounded} object-cover bg-gray700`, TechBlogImgVariants({ size }))}
             src={techMainImgUrl}
             alt='기술블로그 썸네일'
           />

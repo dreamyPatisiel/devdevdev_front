@@ -32,14 +32,14 @@ export const usePostRecommendComment = () => {
       await queryClient.invalidateQueries({ queryKey: ['techBlogComments'] });
       await queryClient.invalidateQueries({ queryKey: ['getBestTechComments'] });
       if (success.data.isRecommended) {
-        return setToastVisible('댓글을 추천했어요!');
+        return setToastVisible({ message: '댓글을 추천했어요!' });
       }
 
-      setToastVisible('댓글 추천을 취소했어요!');
+      setToastVisible({ message: '댓글 추천을 취소했어요!' });
     },
     onError: (error: ErrorRespone) => {
       const errorMessage = error.response.data.message;
-      setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };

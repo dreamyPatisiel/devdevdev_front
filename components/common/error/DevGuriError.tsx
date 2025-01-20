@@ -41,12 +41,12 @@ export default function DevGuriError({
   const paperIcon = <Image src={paper} alt='링크복사 아이콘' />;
   const retryIcon = <RetryIcon />;
 
-  const SUBTIT_STYLE = `st2 ${type === 'mobile' ? 'text-white' : 'text-gray4'}`;
+  const SUBTIT_STYLE = `st2 ${type === 'mobile' ? 'text-white' : 'text-gray200'}`;
 
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(`devdevdev.co.kr${pathname}`);
-      setToastVisible('링크를 복사했어요!');
+      setToastVisible({ message: '링크를 복사했어요!' });
     } catch (err) {
       console.error('URL 복사 실패:', err);
     }

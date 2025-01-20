@@ -4,6 +4,7 @@ import { MyinfoBookmarkDropdownProps } from '@pages/myinfo/bookmark/bookmarkType
 import { TechBlogCommentsDropdownProps } from '@pages/techblog/types/techCommentsType';
 
 import { TypeBlames } from '@/api/useGetBlames';
+import { INITIAL_TECH_SORT_OPTION } from '@pages/techblog/constants/techBlogConstants';
 
 export type PickDropdownProps = 'POPULAR' | 'LATEST' | 'MOST_VIEWED' | 'MOST_COMMENTED';
 
@@ -40,7 +41,7 @@ const createDropdownStore = (defaultSortOption: DropdownOptionProps) =>
   }));
 
 export const usePickDropdownStore = createDropdownStore('POPULAR');
-export const useTechblogDropdownStore = createDropdownStore('LATEST');
+export const useTechblogDropdownStore = createDropdownStore(INITIAL_TECH_SORT_OPTION);
 
 // 신고하기 드롭다운 데이터 저장 store
 interface SelectedStoreProps {

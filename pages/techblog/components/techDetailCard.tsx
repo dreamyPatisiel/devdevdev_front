@@ -18,6 +18,7 @@ import { ROUTES } from '@/constants/routes';
 
 import { TechCardProps } from '../types/techBlogType';
 import {
+  ArticleRecommendButton,
   ArticleViewRoundButton,
   TechBookMarkAndToolTip,
   TechDetailInfo,
@@ -41,6 +42,8 @@ export default function TechDetailCard({
     title,
     isBookmarked,
     techArticleUrl,
+    recommendTotalCount,
+    isRecommended,
   } = techDetailProps;
 
   const queryClient = useQueryClient();
@@ -87,7 +90,6 @@ export default function TechDetailCard({
         )}
       </div>
       {/* ----------------------------------------------------- */}
-
       <div
         className={`w-full ${ImageTitleStyle.base} ${isMobile ? ImageTitleStyle.mobile : ImageTitleStyle.desktop}`}
         style={{
@@ -126,14 +128,30 @@ export default function TechDetailCard({
           )}
         </div>
       </div>
-      {isMobile && <ArticleViewRoundButton margin='mt-[3.2rem]' techArticleUrl={techArticleUrl} />}
-
+      {/* 아티클 전체보기 버튼 - 모바일 위치 */}
+      {isMobile && (
+        <ArticleViewRoundButton
+          className='mx-auto mt-[3.2rem] mb-[2.4rem]'
+          techArticleUrl={techArticleUrl}
+        />
+      )}
+      {/* 본문 */}
       <div className={`${isMobile ? 'px-[1.6rem]' : 'px-[4rem] mt-20'}`}>
         <TechMainContent isMobile={isMobile} content={contents} />
       </div>
-
-      {!isMobile && <ArticleViewRoundButton techArticleUrl={techArticleUrl} />}
-      <div className={`border-b border-b-gray1 ${isMobile ? 'mx-[1.6rem]' : 'mx-[4rem]'}`} />
+      {/* 추천 & 아티클 전체보기 버튼 */}
+      <div
+        className={`flex flex-row justify-center items-center gap-[1rem] mb-[4.8rem] ${isMobile ? 'mt-[3rem]' : 'mt-[8.1rem]'}`}
+      >
+        <ArticleRecommendButton
+          techArticleId={techArticleId}
+          isRecommended={isRecommended}
+          recommendTotalCount={recommendTotalCount}
+        />
+        {!isMobile && <ArticleViewRoundButton techArticleUrl={techArticleUrl} />}
+      </div>
+      {/* 수평선 */}
+      <div className={`border-b border-b-gray500 ${isMobile ? 'mx-[1.6rem]' : 'mx-[4rem]'}`} />
     </section>
   );
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { PickDetailData } from '@pages/pickpickpick/[id]/types/pickDetailData';
@@ -127,7 +126,7 @@ export default function PickForm({
                 <>
                   <input
                     type='text'
-                    className={` border-b-[0.1rem] border-solid border-b-gray2 bg-black py-[1.6rem] placeholder:text-gray4 flex-1 focus:outline-none focus:border-primary2 ${isMobile ? 'st2' : 'h3'}`}
+                    className={` border-b-[0.1rem] border-solid border-b-gray400 bg-black py-[1.6rem] placeholder:text-gray200 flex-1 focus:outline-none focus:border-primary400 ${isMobile ? 'st2' : 'h3'}`}
                     placeholder='주제를 요약한 제목을 작성해주세요'
                     onChange={onChange}
                     defaultValue={pickDetailData?.pickTitle}
@@ -135,7 +134,7 @@ export default function PickForm({
                   />
                   {!isBlured && !value && (
                     <span
-                      className={`text-point1 absolute top-[1.6rem] ${isMobile ? 'st2 left-[26.5rem] ' : 'h3 left-[33.3rem]'}`}
+                      className={`text-secondary400 absolute top-[1.6rem] ${isMobile ? 'st2 left-[26.5rem] ' : 'h3 left-[33.3rem]'}`}
                     >
                       *
                     </span>

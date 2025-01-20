@@ -15,7 +15,7 @@ import { useToastVisibleStore } from '@stores/toastVisibleStore';
 import useIsMobile from '@hooks/useIsMobile';
 
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
-import { MainButton } from '@components/common/buttons/mainButtons';
+import { MainButtonV2 } from '@components/common/buttons/mainButtonsV2';
 import CommentUserInfo from '@components/common/comment/CommentUserInfo';
 import WritableComment from '@components/common/comment/WritableComment';
 import CommentModals from '@components/common/commentModal/CommentModals';
@@ -27,7 +27,7 @@ import HandRight from '@public/image/hand-right.svg';
 import { usePostBlames } from '@/api/usePostBlames';
 import { ROUTES } from '@/constants/routes';
 
-import { useDeleteComment } from '../api/useDeleteComment';
+import { useDeleteTechComment } from '../api/useDeleteComment';
 import { useGetDetailTechBlog } from '../api/useGetTechBlogDetail';
 import { usePostMainComment } from '../api/usePostComment';
 import CommentTechSection from '../components/CommentTechSection';
@@ -47,7 +47,7 @@ const CompanyTitle = ({
   return (
     <div className={`${isMobile ? 'st2 flex flex-col items-center' : 'st1'}`}>
       <p>
-        <span className='text-point1 font-bold'>{title}</span>
+        <span className='text-secondary400 font-bold'>{title}</span>
         {content1}
       </p>
       <p>{content2}</p>
@@ -61,7 +61,7 @@ export default function Page() {
   const { setToastInvisible } = useToastVisibleStore();
 
   // 댓글 삭제&수정 mutation
-  const { mutate: deleteCommentMutation } = useDeleteComment();
+  const { mutate: deleteCommentMutation } = useDeleteTechComment();
   // 모달
   const { selectedCommentId } = useSelectedCommentIdStore();
   const { isModalOpen, modalType, contents } = useModalStore();
@@ -75,10 +75,6 @@ export default function Page() {
   const { loginStatus } = useLoginStatusStore();
 
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    setToastInvisible();
-  }, []);
 
   const { data, status } = useGetDetailTechBlog(techArticleId);
   const { mutate: commentMutation } = usePostMainComment();
@@ -118,7 +114,7 @@ export default function Page() {
       case 'success':
         if (!CurDetailTechBlogData) return;
         const { company } = CurDetailTechBlogData;
-        const TechCareerBaseStyle = 'flex py-[3.1rem] border border-gray2 rounded-[1.6rem]';
+        const TechCareerBaseStyle = 'flex py-[3.1rem] border border-gray400 rounded-[1.6rem]';
         const TechCareerMobileStyle = `flex-col gap-9 px-[2.4rem] items-center`;
         const TechCareerDesktopStyle = `flex-row items-center justify-between px-[3.2rem]`;
         return (
@@ -134,16 +130,20 @@ export default function Page() {
                 가볼까요?'
               />
               <Link href={company.careerUrl} target='_blank'>
-                <MainButton
+                <MainButtonV2
                   text='채용정보 보러가기'
-                  variant='primary'
+                  color='primary'
                   icon={<Image src={HandRight} alt='오른쪽 손가락 아이콘' />}
+                  iconPosition='right'
+                  size='medium'
+                  line={false}
+                  radius='rounded'
                 />
               </Link>
             </section>
 
             {/* 댓글 */}
-            <CommentUserInfo className={`${isMobile ?'mt-[8.8rem]': 'mt-[7.2rem]' }`} />
+            <CommentUserInfo className={`${isMobile ? 'mt-[8.8rem]' : 'mt-[7.2rem]'}`} />
 
             {/* 댓글작성 */}
             <div className='mt-[1.6rem] mb-[10rem]'>
@@ -161,7 +161,6 @@ export default function Page() {
 
             {/* 목록으로 버튼 */}
             {isMobile && <MobileToListButton route={ROUTES.TECH_BLOG} />}
-
           </article>
         );
       default:

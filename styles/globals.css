@@ -29,6 +29,43 @@
     --gray-4: #8993a0;
     --gray-5: #b4bfce;
 
+    --red500: #9b0707;
+    --red400: #f01515;
+    --red300: #ff3e3e;
+    --red200: #ff6f6f;
+    --red100: #ff9999;
+    --red50: #ffd4d4;
+
+    --primary800: #360b62;
+    --primary700: #51168d;
+    --primary600: #7317d0;
+    --primary500: #9021ff;
+    --primary400: #a448ff;
+    --primary300: #bd79ff;
+    --primary200: #d9b3ff;
+    --primary100: #eeddff;
+    --primary50: #f8f2ff;
+
+    --secondary800: #004518;
+    --secondary700: #086428;
+    --secondary600: #078a34;
+    --secondary500: #00d649;
+    --secondary400: #40ff81;
+    --secondary300: #61ff97;
+    --secondary200: #85ffae;
+    --secondary100: #a7ffc5;
+    --secondary50: #d2ffe2;
+
+    --gray800: #0d0e11;
+    --gray700: #151721;
+    --gray600: #1a1b23;
+    --gray500: #2a3038;
+    --gray400: #4b5766;
+    --gray300: #677485;
+    --gray200: #94a0b0;
+    --gray100: #b8c3d2;
+    --gray50: #ebeff5;
+
     --bold: '600';
     --medium: '300';
     --light: '100';
@@ -113,6 +150,51 @@
       #202020 95%
     );
     animation: loading 1.5s infinite steps(60);
+  }
+
+  @keyframes highlight {
+    0% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 0% 100%;
+    }
+  }
+
+  /* 1번 애니메이션 */
+  /* .comment-item {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    background-image: linear-gradient(270deg, #2a3038 0%, #000 50%, #2a3038 100%);
+    animation: highlight 1.5s linear 6 forwards alternate;
+  } */
+
+  /* 2번 애니메이션 */
+  .comment-item {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    background-image: linear-gradient(270deg, #000 0%, #2a3038 100%);
+    animation: highlight 1.5s linear 6 forwards alternate;
+  }
+
+  .mobile-dropdown-item img.default {
+    display: block;
+  }
+
+  .mobile-dropdown-item img.hover {
+    display: none;
+  }
+
+  .mobile-dropdown-item:hover img.default {
+    display: none;
+  }
+
+  .mobile-dropdown-item:hover img.hover {
+    display: block;
   }
 }
 

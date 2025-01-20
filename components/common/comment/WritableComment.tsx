@@ -140,7 +140,7 @@ export default function WritableComment({
 
   return (
     <div
-      className={`${isMobile ? 'px-[1.6rem]' : 'px-[2.4rem]'}  py-[1.6rem] bg-[#1A1B23] rounded-[1.6rem]`}
+      className={`${isMobile ? 'px-[1.6rem]' : 'px-[2.4rem]'}  py-[1.6rem] bg-gray600 rounded-[1.6rem]`}
     >
       <div
         className={`p2 w-full resize-none outline-none ${isMobile ? 'max-h-[12rem] min-h-[9.6rem]' : 'max-h-[28rem] min-h-[6.8rem]'} overflow-y-scroll scrollbar-hide`}
@@ -148,7 +148,7 @@ export default function WritableComment({
       >
         {!textValue && mode === 'register' && !parentCommentAuthor && (
           <span
-            className={`p2 text-[#677485] absolute ${isMobile ? 'pr-[3.6rem]' : ''}`}
+            className={`p2 text-gray300 absolute ${isMobile ? 'pr-[3.6rem]' : ''}`}
             onClick={handleFocus}
           >
             댑댑이들의 의견을 남겨주세요! 광고 혹은 도배글을 작성할 시에는 관리자 권한으로 삭제할 수
@@ -163,7 +163,7 @@ export default function WritableComment({
         <span
           contentEditable='false'
           suppressContentEditableWarning={true}
-          className='p2 text-[#BD79FF] pointer-events-none ml-0'
+          className='p2 text-primary300 pointer-events-none ml-0'
         >
           {parentCommentAuthor ? `@${parentCommentAuthor} ` : ''}
         </span>
@@ -179,7 +179,7 @@ export default function WritableComment({
       </div>
 
       <div className={updatedClassNames.bottomSection}>
-        <div className='p2 font-light text-gray4'>
+        <div className='p2 font-light text-gray300'>
           {textCount}/{MAX_LENGTH}
         </div>
         <div className={updatedClassNames.buttonContainer}>

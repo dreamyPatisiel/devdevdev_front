@@ -33,16 +33,16 @@ export const usePostPickComment = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['pickCommentData'] });
       await queryClient.invalidateQueries({ queryKey: ['getBestComments'] });
-      setToastVisible('댓글을 성공적으로 작성했어요!', 'success');
+      setToastVisible({ message: '댓글을 성공적으로 작성했어요!', type: 'success' });
     },
     onError: (error: ErrorRespone) => {
       const errorMessage = error.response.data.message;
 
       if (errorMessage == null) {
-        return setToastVisible(UNDEFINED_ERROR_MESSAGE, 'error');
+        return setToastVisible({ message: UNDEFINED_ERROR_MESSAGE, type: 'error' });
       }
 
-      return setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };
@@ -79,16 +79,16 @@ export const usePostPickReplyComment = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['pickCommentData'] });
       await queryClient.invalidateQueries({ queryKey: ['getBestComments'] });
-      setToastVisible('댓글을 성공적으로 작성했어요!', 'success');
+      setToastVisible({ message: '댓글을 성공적으로 작성했어요!', type: 'success' });
     },
     onError: (error: ErrorRespone) => {
       const errorMessage = error.response.data.message;
 
       if (errorMessage == null) {
-        return setToastVisible(UNDEFINED_ERROR_MESSAGE, 'error');
+        return setToastVisible({ message: UNDEFINED_ERROR_MESSAGE, type: 'error' });
       }
 
-      return setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };

@@ -12,6 +12,7 @@ import { useSelectedPickCommentIdStore } from '@stores/pickCommentIdStore';
 
 import useIsMobile from '@hooks/useIsMobile';
 
+import NicknameWithMaskedEmail from '@components/common/NicknameWithMaskedEmail';
 import MobileToListButton from '@components/common/mobile/mobileToListButton';
 import MoreButton from '@components/common/moreButton';
 
@@ -95,18 +96,22 @@ export default function Index() {
           ${isMobile ? 'px-[1.6rem]' : 'px-[20.4rem] pt-[6.4rem] pb-[12.2rem]'}
           `}
       >
-        <div className='border-b-[0.1rem] border-b-gray3 flex justify-between items-baseline pb-[1.6rem] pl-[1rem]'>
+        <div className='border-b-[0.1rem] border-b-gray400 flex justify-between items-baseline pb-[1.6rem] pl-[1rem]'>
           <div>
             <h3 className='h3 font-bold mb-[0.8rem]'>{pickDetailData?.pickTitle}</h3>
 
             <div>
-              <span className='p2 text-gray5 font-bold'>
-                {pickDetailData?.nickname}({pickDetailData?.userId})
+              <span className='p2 text-gray100 font-bold'>
+                <NicknameWithMaskedEmail
+                  author={pickDetailData?.nickname ?? ''}
+                  maskedEmail={pickDetailData?.userId ?? ''}
+                  textSize='p2'
+                />
               </span>
-              <span className='p2 text-gray4 ml-[2rem] mr-[1rem]'>{formatPickDate}</span>
+              <span className='p2 text-gray200 ml-[2rem] mr-[1rem]'>{formatPickDate}</span>
               {loginStatus === 'login' && !pickDetailData?.isAuthor && (
                 <span
-                  className='p2 text-gray4 cursor-pointer'
+                  className='p2 text-gray200 cursor-pointer'
                   onClick={() => {
                     setModalType('신고');
                     openModal();

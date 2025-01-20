@@ -56,7 +56,7 @@ export default function DesktopMainTechCard({
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({ queryKey: ['techBlogBookmark'] });
-          setToastVisible('북마크에서 삭제했어요');
+          setToastVisible({ message: '북마크에서 삭제했어요' });
         },
       },
     );
@@ -65,7 +65,7 @@ export default function DesktopMainTechCard({
   return (
     <div
       key={id}
-      className='grid grid-flow-col border-white gap-[3.2rem] text-white py-[2.8rem] border-b border-b-gray1 border-solid select-none'
+      className='grid grid-flow-col border-white gap-[3.2rem] text-white py-[2.8rem] border-b border-b-gray500 border-solid select-none'
     >
       <div>
         <TechBlogImg id={id} thumbnailUrl={thumbnailUrl} rounded='rounded-[0.8rem]' size='small' />

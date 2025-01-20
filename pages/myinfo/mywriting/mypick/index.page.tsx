@@ -4,6 +4,9 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
+import MyWritingNav from '@pages/myinfo/components/MyWritingNav';
+import NoMyInfoData from '@pages/myinfo/components/NoMyInfoData';
+import MyInfo from '@pages/myinfo/index.page';
 import { PickDataProps } from '@pages/pickpickpick/types/pick';
 
 import useIsMobile from '@hooks/useIsMobile';
@@ -13,8 +16,6 @@ import { MyPickSkeletonList } from '@components/common/skeleton/pickSkeleton';
 
 import { ROUTES } from '@/constants/routes';
 
-import NoMyInfoData from '../components/NoMyInfoData';
-import MyInfo from '../index.page';
 import { useGetMyPicks } from './apiHooks/useGetMyPicks';
 
 const DynamicComponent = dynamic(() => import('@/pages/pickpickpick/components/PickContainer'));
@@ -40,7 +41,7 @@ export default function MyPick() {
 
       default:
         if (myPicks?.pages[0].data.data.content.length === 0)
-          return <NoMyInfoData type='pickpickpick' />;
+          return <NoMyInfoData type='noMyPick' />;
 
         return (
           <>
@@ -76,12 +77,10 @@ export default function MyPick() {
 
   return (
     <MyInfo>
-      <div className='flex flex-col gap-[2.4rem]'>
-        {isMobile ? <></> : <h1 className='h3 font-bold'>내가 썼어요</h1>}
+      <MyWritingNav />
 
-        {getStatusComponent()}
-        <div ref={bottom} />
-      </div>
+      {getStatusComponent()}
+      <div ref={bottom} />
     </MyInfo>
   );
 }

@@ -27,6 +27,8 @@ export const getTechBlogData = async ({
     ...(score && { score }),
   };
 
+
+
   const res = await axios.get(`/devdevdev/api/v1/articles?`, {
     params: {
       ...queryParams,
@@ -38,7 +40,7 @@ export const getTechBlogData = async ({
 export const useInfiniteTechBlogData = (
   sortOption: TechBlogDropdownProps,
   keyword?: string,
-  companyId?: number,
+  companyId?: number|null,
   size?: number,
 ) => {
   const isValidSortOption = techBlogDropdownOptions.includes(sortOption);

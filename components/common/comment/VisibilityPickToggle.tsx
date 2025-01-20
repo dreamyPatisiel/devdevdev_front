@@ -33,7 +33,7 @@ export default function VisibilityPickToggle({
         </Tooltip>
       </div>
 
-      <span className='text-c1 font-bold text-gray5'>
+      <span className='text-c1 font-bold text-gray200'>
         <label htmlFor='myvote-check' className='inline-flex items-center cursor-pointer'>
           <input
             type='checkbox'
@@ -45,7 +45,7 @@ export default function VisibilityPickToggle({
             disabled={loginStatus === 'logout'}
           />
           <span
-            className={`text-gray4 c1 font-bold flex mr-3 ${isChecked ? 'text-point3' : ''} ${loginStatus === 'logout' ? 'cursor-not-allowed' : ''}`}
+            className={`text-gray200 c1 font-bold flex mr-3 ${isChecked ? 'text-secondary300' : ''} ${loginStatus === 'logout' ? 'cursor-not-allowed' : ''}`}
           >
             {isChecked ? '픽픽픽 공개' : '픽픽픽 비공개'}
           </span>
@@ -54,7 +54,7 @@ export default function VisibilityPickToggle({
           >
             <div
               className={cn(
-                `absolute top-[3.75px] right-[0.4rem] rounded-full h-5 w-5 transition-all ${isChecked ? 'bg-point3 translate-x-[-1.5rem]' : 'bg-gray4'}`,
+                `absolute top-[3.75px] right-[0.4rem] rounded-full h-5 w-5 transition-all ${isChecked ? 'bg-secondary500 translate-x-[-1.5rem]' : 'bg-gray300'}`,
               )}
             ></div>
           </div>

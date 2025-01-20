@@ -33,13 +33,14 @@ const useLogoutMutation = () => {
         setLogoutStatus();
         await queryClient.invalidateQueries({ queryKey: ['pickData'] });
         await queryClient.invalidateQueries({ queryKey: ['techBlogData'] });
+        await queryClient.invalidateQueries({ queryKey: ['techDetail'] });
         router.push(ROUTES.MAIN);
       }
     },
     onError: (error) => {
       closeLoginModal();
       console.error('로그아웃 실패:', error);
-      setToastVisible('로그아웃 실패', 'error');
+      setToastVisible({ message: '로그아웃 실패', type: 'error' });
     },
   });
 

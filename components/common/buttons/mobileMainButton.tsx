@@ -23,7 +23,7 @@ export default function MobileMainButton({ text, onClick, disabled }: MobileMain
     <div className='fixed h-[5.8rem]'>
       <button
         type='button'
-        className='fixed bg-primary1 bottom-0 left-0 right-0 p-[1.6rem] st2 font-bold disabled:bg-primary5'
+        className='fixed bg-primary500 bottom-0 left-0 right-0 p-[1.6rem] st2 font-bold disabled:bg-primary600'
         onClick={onClick}
         disabled={disabled}
       >

@@ -20,7 +20,7 @@ export default function CommentCheckFilter({
           onChange={onFilterChange}
           checked={isChecked}
         />
-        <span className='p2 text-gray5 select-none'>{checkOptionTitle}</span>
+        <span className='p2 text-gray200 select-none'>{checkOptionTitle}</span>
       </label>
     </div>
   );

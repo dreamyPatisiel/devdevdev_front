@@ -29,9 +29,13 @@ import {
 export function Dropdown({
   type,
   disable = false,
+  size = 'small',
+  line = false,
 }: {
   type?: 'pickpickpick' | 'techblog' | 'bookmark' | 'techComment' | 'pickComment';
   disable?: boolean;
+  size?: 'small' | 'medium';
+  line?: boolean;
 }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -93,14 +97,16 @@ export function Dropdown({
   return (
     <div
       className={twMerge(
-        `rounded-[0.4rem] bg-gray1 w-[14.8rem] relative cursor-pointer z-10`,
+        `rounded-[0.8rem] bg-gray600 relative cursor-pointer z-10 
+        ${size === 'small' ? 'w-[11rem]' : 'w-[15.2rem]'}
+        ${line && 'border border-gray400'}`,
         disable && DISABLE_CLASS,
       )}
       onClick={handleDropdownToggle}
     >
       <label
         htmlFor='dropdown'
-        className='text-gray5 text-c1 leading-[2.4rem] cursor-pointer flex justify-between items-center px-[1.2rem] py-[0.8rem] '
+        className={`text-gray200 leading-[2.4rem] cursor-pointer flex justify-between items-center p-[1.2rem] ${size === 'small' ? 'p2' : 'p1'}`}
       >
         {dropdownOptionToKorean(selectedSortOption)}
         <Image src={AngleDown} alt='아래방향 화살표' />
@@ -109,13 +115,20 @@ export function Dropdown({
       {isDropdownOpen && (
         <ul
           id='dropdown'
-          className='text-gray4 text-c1 absolute rounded-[0.4rem] pl-[1.2rem] pt-[1.5rem] pb-[2rem] bg-gray1 top-[2.5rem] right-[0] w-[14.8rem] flex flex-col gap-[1.2rem]'
+          className={`text-gray200 absolute rounded-[0.8rem] rounded-t-none bg-gray600 top-[4rem] flex flex-col 
+            ${size === 'small' ? 'w-[11rem] p2' : 'w-[15.2rem] p1'}
+            ${line && 'border border-gray400 border-t-0 -right-[0.1rem]'}
+            `}
         >
           {dropdownOptions.map((option, index) => (
             <li
               key={index}
               onClick={handleOptionSelected(option as DropdownOptionProps)}
-              className={`cursor-pointer hover:text-gray5 ${selectedSortOption === option && 'text-gray5'}`}
+              className={`py-[0.8rem] cursor-pointer hover:text-secondary300 hover:bg-gray500
+                ${index === dropdownOptions.length - 1 ? 'hover:rounded-b-[0.8rem]' : ''}
+                ${selectedSortOption === option && 'text-secondary300'}
+                ${size === 'small' ? 'px-[1.2rem] py-[0.6rem]' : 'px-[1.6rem] py-[1rem]'}
+                `}
             >
               {dropdownOptionToKorean(option as DropdownOptionProps)}
             </li>
@@ -161,9 +174,9 @@ export function LargeBorderDropdown({ dropdownMenu }: { dropdownMenu: TypeBlames
         <label
           htmlFor='dropdown'
           className={cn(
-            'p1 cursor-pointer flex justify-between items-center px-[1.6rem] py-[1.6rem] rounded-[0.8rem] w-full border-[0.1rem] border-[#4B5766] text-gray4',
+            'p1 cursor-pointer flex justify-between items-center px-[1.6rem] py-[1.6rem] rounded-[0.8rem] w-full border-[0.1rem] border-gray400 text-gray200',
             {
-              'text-gray5': selectedBlameData?.reason,
+              'text-gray200': selectedBlameData?.reason,
               'rounded-b-none border-b-0': onDropdown,
             },
           )}
@@ -176,7 +189,7 @@ export function LargeBorderDropdown({ dropdownMenu }: { dropdownMenu: TypeBlames
         {onDropdown && (
           <ul
             id='dropdown'
-            className='text-gray4 p1 absolute rounded-b-[0.8rem] px-[1.6rem] pb-[0.8rem] bg-[#1A1B23] top-full right-0 w-full flex flex-col gap-[1.2rem] border-t-0 border-[0.1rem] border-gray3 z-10'
+            className='text-gray200 p1 absolute rounded-b-[0.8rem] px-[1.6rem] pb-[0.8rem] bg-gray600 top-full right-0 w-full flex flex-col gap-[1.2rem] border-t-0 border-[0.1rem] border-gray3 z-10'
           >
             {dropdownMenu
               .filter((menu) => selectedBlameData?.id !== menu.id)
@@ -184,7 +197,7 @@ export function LargeBorderDropdown({ dropdownMenu }: { dropdownMenu: TypeBlames
                 <li
                   key={index}
                   onClick={handleSelected(menu)}
-                  className='cursor-pointer hover:text-gray5'
+                  className='cursor-pointer hover:text-gray50'
                 >
                   {menu.reason}
                 </li>
@@ -196,22 +209,22 @@ export function LargeBorderDropdown({ dropdownMenu }: { dropdownMenu: TypeBlames
       {selectedBlameData?.reason === '기타' && (
         <>
           <div
-            className={`p-[1.6rem] mt-[1.6rem] rounded-[0.8rem] border ${textCount < 10 ? 'border-[#FF3E3E]' : 'border-gray3'}`}
+            className={`p-[1.6rem] mt-[1.6rem] rounded-[0.8rem] border ${textCount < 10 ? 'border-red300' : 'border-gray3'}`}
           >
             <textarea
               value={textValue}
               rows={2}
-              className={`p1 placeholder:text-gray4 bg-[#1A1B23] w-full resize-none outline-none`}
+              className={`p1 placeholder:text-gray300 bg-gray600 w-full resize-none outline-none`}
               placeholder='신고하게 된 이유를 작성해주세요 (10자 내외)'
               onChange={handleTextCount}
               maxLength={BLAMES_MAX_LENGTH}
             />
-            <div className='p2 font-light text-gray4 flex justify-end'>
+            <div className='p2 font-light text-gray300 flex justify-end'>
               {textCount}/{BLAMES_MAX_LENGTH}
             </div>
           </div>
           {textCount < 10 && (
-            <p className='p2 mt-[0.8rem] text-[#FF9999]'>최소 10글자 이상 작성해주세요</p>
+            <p className='p2 mt-[0.8rem] text-red100'>최소 10글자 이상 작성해주세요</p>
           )}
         </>
       )}

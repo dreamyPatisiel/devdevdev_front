@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { useRouter } from 'next/router';
 
 import { useModalStore } from '@stores/modalStore';
 import { useSelectedPickCommentIdStore } from '@stores/pickCommentIdStore';
 import { useToastVisibleStore } from '@stores/toastVisibleStore';
 import { useUserInfoStore } from '@stores/userInfoStore';
 
+import { useAnimationEnd } from '@hooks/useAnimationEnd';
 import useIsMobile from '@hooks/useIsMobile';
 
 import WritableComment from '@components/common/comment/WritableComment';
@@ -73,17 +76,23 @@ export default function Comment({
   const [isReplyActived, setIsReplyActived] = useState(false);
   const [isEditActived, setIsEditActived] = useState(false);
   const [preContents, setPreContents] = useState('');
+  const router = useRouter();
+  const commentRef = useRef<HTMLDivElement>(null);
 
   const { mutate: postPickReplyMutate } = usePostPickReplyComment();
   const { mutate: patchPickCommentMutate } = usePatchPickComment();
   const { mutate: postCommentRecommendMutate } = usePostCommentRecommend();
 
-  const { openModal, setModalType, setContents } = useModalStore();
+  const { openModal, setModalType, setTitle } = useModalStore();
   const { setSelectedCommentId } = useSelectedPickCommentIdStore();
   const { setToastVisible } = useToastVisibleStore();
 
   const { userInfo } = useUserInfoStore();
   const isMobile = useIsMobile();
+
+  const { commentId } = router.query;
+
+  useAnimationEnd({ ref: commentRef });
 
   useEffect(() => {
     const handleEscKeydown = (e: KeyboardEvent) => {
@@ -162,7 +171,7 @@ export default function Comment({
       buttonType: '삭제하기',
       moreButtonOnclick: async () => {
         setModalType('댓글삭제');
-        setContents(`삭제하면 복구할 수 없고 \n 다른 회원들이 댓글을 달 수 없어요`);
+        setTitle(`삭제하면 복구할 수 없고 \n 다른 회원들이 댓글을 달 수 없어요`);
         setSelectedCommentId(pickCommentId);
         openModal();
       },
@@ -184,7 +193,7 @@ export default function Comment({
             buttonType: '삭제하기',
             moreButtonOnclick: () => {
               setModalType('댓글삭제');
-              setContents(`삭제하면 복구할 수 없고 \n 다른 회원들이 댓글을 달 수 없어요`);
+              setTitle(`삭제하면 복구할 수 없고 \n 다른 회원들이 댓글을 달 수 없어요`);
               setSelectedCommentId(pickCommentId);
               openModal();
             },
@@ -206,20 +215,24 @@ export default function Comment({
 
     if (isSubComment) {
       if (hasRestComments) {
-        return 'bg-[#0D0E11] border-b-0';
+        return 'bg-gray800 border-b-0';
       }
 
-      return 'bg-[#0D0E11] border-b-[0.1rem] border-b-[#2A3038]';
+      return 'bg-gray800 border-b-[0.1rem] border-b-gray200';
     }
 
-    return 'border-b-[0.1rem] border-b-[#4B5766]';
+    return 'border-b-[0.1rem] border-b-gray400';
   };
 
   return (
     <div
-      className={`flex flex-col gap-[2.4rem] pt-[2.4rem] pb-[3.2rem]
+      id={`comment-${pickCommentId}`}
+      ref={commentRef}
+      className={`flex flex-col gap-[2.4rem] pt-[2.4rem] pb-[3.2rem] px-[1.6rem]
         ${isSubComment && (isMobile ? 'px-[1.6rem]' : 'px-[3.2rem]')}     
-        ${commentContainerStyle()}`}
+        ${commentContainerStyle()}
+        ${commentId === String(pickCommentId) ? 'comment-item' : ''}
+        `}
     >
       <CommentHeader
         isCommentAuthor={isCommentOfPickAuthor}
@@ -264,12 +277,13 @@ export default function Comment({
               disabled={isDeleted}
               onClick={() => {
                 if (isDeleted) {
-                  return setToastVisible('삭제된 댓글은 추천할 수 없습니다.', 'error');
+                  return setToastVisible({
+                    message: '삭제된 댓글은 추천할 수 없습니다.',
+                    type: 'error',
+                  });
                 }
 
-                postCommentRecommendMutate(
-                  { pickId, pickCommentId },
-                );
+                postCommentRecommendMutate({ pickId, pickCommentId });
               }}
             />
           </div>

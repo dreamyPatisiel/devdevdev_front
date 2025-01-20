@@ -36,7 +36,7 @@ export const usePostVote = () => {
     mutationFn: postVote,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['getDetailPickData'] });
-      setToastVisible(POST_VOTE_SUCCESS);
+      setToastVisible({ message: POST_VOTE_SUCCESS });
       await queryClient.invalidateQueries({ queryKey: ['pickData'] });
       queryClient.invalidateQueries({ queryKey: ['myPicksData'] });
       setUnVoted();
@@ -47,10 +47,10 @@ export const usePostVote = () => {
       const errorMessage = error.response.data.message;
 
       if (errorMessage == null) {
-        return setToastVisible(UNDEFINED_ERROR_MESSAGE, 'error');
+        return setToastVisible({ message: UNDEFINED_ERROR_MESSAGE, type: 'error' });
       }
 
-      return setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };

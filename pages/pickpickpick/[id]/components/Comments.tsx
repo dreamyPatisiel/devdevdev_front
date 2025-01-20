@@ -1,11 +1,14 @@
 import { Fragment, useRef, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { InfiniteData, UseQueryResult } from '@tanstack/react-query';
 
 import { PickOptionType } from '@pages/pickpickpick/types/pick';
 
 import { PickCommentDropdownProps, useDropdownStore } from '@stores/dropdownStore';
 
+import { useCheckAndScrollToComment } from '@hooks/useCheckAndScrollToComment';
 import useIsMobile from '@hooks/useIsMobile';
 import { useObserver } from '@hooks/useObserver';
 
@@ -24,13 +27,14 @@ import CommentSet, { CommentsProps } from './CommentSet';
 
 export default function Comments({ pickId }: { pickId: string }) {
   const [currentPickOptionTypes, setCurrentPickOptionTypes] = useState<PickOptionType[]>([]);
+  const router = useRouter();
 
   const bottomDiv = useRef(null);
 
   const { sortOption } = useDropdownStore();
   const isMobile = useIsMobile();
 
-  const { pickCommentsData, isFetchingNextPage, hasNextPage, status, onIntersect } =
+  const { pickCommentsData, isFetchingNextPage, hasNextPage, status, onIntersect, fetchNextPage } =
     useInfinitePickComments({
       pickId,
       currentPickOptionTypes,
@@ -41,6 +45,15 @@ export default function Comments({ pickId }: { pickId: string }) {
   useObserver({
     target: bottomDiv,
     onIntersect,
+  });
+
+  const { commentId } = router.query;
+
+  useCheckAndScrollToComment({
+    commentId: commentId as string,
+    hasNextPage,
+    fetchNextPage,
+    status,
   });
 
   const { data: bestCommentsData } = useGetBestComments({
@@ -82,9 +95,9 @@ export default function Comments({ pickId }: { pickId: string }) {
 
       default:
         return (
-          <div className='border-t-[0.1rem] border-t-[#4B5766]'>
+          <div className='border-t-[0.1rem] border-t-gray400'>
             {PICK_COMMENT_TOTAL_COUNT === 0 && (
-              <p className='p1 text-[#94A0B0] text-center my-[14rem]'>
+              <p className='p1 text-gray200 text-center my-[14rem]'>
                 작성된 댓글이 없어요! 첫 댓글을 작성해주세요
               </p>
             )}
@@ -122,8 +135,8 @@ export default function Comments({ pickId }: { pickId: string }) {
   return (
     <div className='flex flex-col gap-[3.2rem]'>
       <div className={`flex  ${isMobile ? 'flex-col ' : 'items-center justify-between'}`}>
-        <span className={`p1 font-bold text-gray5 ${isMobile ? 'mb-[1.6rem]' : ''}`}>
-          <span className={`text-point3`}>{PICK_COMMENT_TOTAL_COUNT}</span>
+        <span className={`p1 font-bold text-gray200 ${isMobile ? 'mb-[1.6rem]' : ''}`}>
+          <span className={`text-secondary500`}>{PICK_COMMENT_TOTAL_COUNT}</span>
           개의 댓글
         </span>
 

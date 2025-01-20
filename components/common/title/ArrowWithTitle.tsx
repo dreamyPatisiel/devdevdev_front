@@ -14,9 +14,9 @@ const ARROW_TITLE_CLASSES = ['font-bold'];
 export const ArrowWithTitleVariants = cva(ARROW_TITLE_CLASSES, {
   variants: {
     variant: {
-      mainTitle: ['st2', 'text-gray4'],
+      mainTitle: ['st2', 'text-gray200'],
       similarPick: ['st2', 'text-white'],
-      defaultPick: ['p1', 'text-gray5'],
+      defaultPick: ['p1', 'text-gray100'],
     },
   },
 });
@@ -44,7 +44,7 @@ const ArrowWithTitle: FC<ArrowWithTitleProps> = ({
 
       <div className='flex items-center'>
         {iconText && routeURL && (
-          <Link href={routeURL} className='p2 text-primary3 mr-3'>
+          <Link href={routeURL} className='p2 text-primary200 mr-3'>
             {iconText}
           </Link>
         )}

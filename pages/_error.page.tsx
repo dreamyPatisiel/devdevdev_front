@@ -59,8 +59,8 @@ export default function ErrorPage({ resetErrorBoundary }: { resetErrorBoundary: 
         onClick={handleRetryClick}
         className='flex gap-[1.2rem] items-center mt-[2.5rem]'
       >
-        <RetryIcon color='var(--gray-4)' />
-        <span className='p1 font-bold text-gray4'>새로고침</span>
+        <RetryIcon color='var(--gray200)' />
+        <span className='p1 font-bold text-gray200'>새로고침</span>
       </button>
     </div>
   );

@@ -113,5 +113,5 @@ export const useInfinitePickComments = ({
     [fetchNextPage, hasNextPage, isFetching],
   );
 
-  return { pickCommentsData, isFetchingNextPage, hasNextPage, status, onIntersect };
+  return { pickCommentsData, isFetchingNextPage, hasNextPage, status, onIntersect, fetchNextPage };
 };

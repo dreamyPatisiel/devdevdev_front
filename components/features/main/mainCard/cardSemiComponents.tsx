@@ -39,7 +39,7 @@ export const MainCardLink = ({ path }: { path: '/pickpickpick' | '/techblog' }) 
         className={cn(
           `font-bold mr-[2rem] pb-4 border-b 
           ${isMobile ? 'pl-4' : 'px-5'} 
-          ${type === 'pick' ? 'border-b-primary1' : 'border-b-point1'}`,
+          ${type === 'pick' ? 'border-b-primary500' : 'border-b-secondary400'}`,
         )}
       >
         {LinkText}

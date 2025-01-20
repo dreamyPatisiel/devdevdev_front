@@ -18,7 +18,10 @@ export default function useClickCounter({
     let timer: NodeJS.Timeout;
 
     if (clickCount > maxCount) {
-      setToastVisible('요청이 너무 많아요!  잠시 후에 다시 시도해주세요', 'error');
+      setToastVisible({
+        message: '요청이 너무 많아요!  잠시 후에 다시 시도해주세요',
+        type: 'error',
+      });
       setClickCount(0);
     } else {
       timer = setTimeout(() => {

@@ -32,16 +32,16 @@ export const usePatchPickComment = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['pickCommentData'] });
       await queryClient.invalidateQueries({ queryKey: ['getBestComments'] });
-      setToastVisible('댓글을 성공적으로 수정했어요!');
+      setToastVisible({ message: '댓글을 성공적으로 수정했어요!' });
     },
     onError: (error: ErrorRespone) => {
       const errorMessage = error.response.data.message;
 
       if (errorMessage == null) {
-        return setToastVisible(UNDEFINED_ERROR_MESSAGE, 'error');
+        return setToastVisible({ message: UNDEFINED_ERROR_MESSAGE, type: 'error' });
       }
 
-      return setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };

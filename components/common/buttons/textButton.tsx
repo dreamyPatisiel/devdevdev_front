@@ -1,27 +1,31 @@
-import { useModalStore } from '@stores/modalStore';
+import { cn } from '@utils/mergeStyle';
+
+import { TextButtonProps } from './types/textButton';
+import { TextButtonVariants } from './variants/textButton';
 
 export default function TextButton({
-  buttonType,
-  comment,
-  isModal,
-}: {
-  buttonType: string;
-  comment: string;
-  isModal: boolean;
-}) {
-  const { openModal, isModalOpen, setModalType, setContents } = useModalStore();
-
-  const handleModal = () => {
-    setModalType(buttonType);
-    if (!isModalOpen && isModal) {
-      openModal();
-      setContents(comment);
-    }
-  };
-
+  buttonContent,
+  size,
+  color,
+  line,
+  leftIcon,
+  rightIcon,
+  fontWeight,
+  className,
+  type = 'button',
+  onClick,
+  ...rest
+}: TextButtonProps) {
   return (
-    <button onClick={handleModal} className='ml-[0.8rem]'>
-      {buttonType}
+    <button
+      onClick={onClick}
+      type={type}
+      className={cn(TextButtonVariants({ color, line, size, fontWeight }), className)}
+      {...rest}
+    >
+      {leftIcon && leftIcon}
+      {buttonContent}
+      {rightIcon && rightIcon}
     </button>
   );
 }

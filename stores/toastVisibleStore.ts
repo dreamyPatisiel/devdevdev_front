@@ -1,20 +1,51 @@
 import { create } from 'zustand';
 
-type ToastType = 'success' | 'error';
+type ToastType = 'success' | 'error' | 'default';
 
 interface ToastVisibleProps {
   isToastVisible: boolean;
   toastMessage: string;
   toastType: ToastType;
-  setToastVisible: (message: string, type?: ToastType) => void;
+  toastIcon: string;
+  toastMessageColor: string;
+  setToastVisible: ({
+    message,
+    type,
+    icon,
+    messageColor,
+  }: {
+    message: string;
+    type?: ToastType;
+    icon?: string;
+    messageColor?: string;
+  }) => void;
   setToastInvisible: () => void;
 }
 
 export const useToastVisibleStore = create<ToastVisibleProps>((set) => ({
   isToastVisible: false,
   toastMessage: '',
-  toastType: 'success',
-  setToastVisible: (message: string, type?: ToastType) =>
-    set({ toastMessage: message, isToastVisible: true, toastType: type }),
-  setToastInvisible: () => set({ toastMessage: '', isToastVisible: false }),
+  toastType: 'default',
+  toastIcon: '',
+  toastMessageColor: '',
+  setToastVisible: ({
+    message,
+    type,
+    icon,
+    messageColor,
+  }: {
+    message: string;
+    type?: ToastType;
+    icon?: string;
+    messageColor?: string;
+  }) =>
+    set({
+      toastMessage: message,
+      isToastVisible: true,
+      toastType: type,
+      toastIcon: icon,
+      toastMessageColor: messageColor,
+    }),
+  setToastInvisible: () =>
+    set({ toastMessage: '', isToastVisible: false, toastIcon: '', toastMessageColor: '' }),
 }));

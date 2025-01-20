@@ -41,7 +41,7 @@ export default function Index() {
           queryClient.invalidateQueries({ queryKey: ['pickData'] });
           queryClient.invalidateQueries({ queryKey: ['myPicksData'] });
           router.push(`/pickpickpick/${id}`);
-          setToastVisible(PICK_UPDATE_MESSAGE);
+          setToastVisible({ message: PICK_UPDATE_MESSAGE });
         },
       },
     );

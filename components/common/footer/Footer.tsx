@@ -43,10 +43,10 @@ export default function Footer() {
             <Link href={DEVDEVDEV_INFO} target='_blank'>
               <Image src={book} alt='책 아이콘' />
             </Link>
-            <p className='ml-4 mr-6 text-gray4'>꿈빛파티시엘</p>
+            <p className='ml-4 mr-6 text-gray200'>꿈빛파티시엘</p>
             <a
               href={`mailto:${DEVDEVDEV_EMAIL}`}
-              className='flex justify-center items-center gap-3 text-gray4'
+              className='flex justify-center items-center gap-3 text-gray200'
             >
               <Image src={envelope} alt='메일 아이콘' />
               <span>{DEVDEVDEV_EMAIL}</span>
@@ -60,13 +60,13 @@ export default function Footer() {
             <Link href={DEVDEVDEV_YOUTUBE} target='_blank'>
               <Image src={youtube} alt='유투브 아이콘' />
             </Link>
-            <Link href={DEVDEVDEV_PRIVACY} className=' text-gray3' target='_blank'>
+            <Link href={DEVDEVDEV_PRIVACY} className=' text-gray400' target='_blank'>
               개인정보 처리방침
             </Link>
           </div>
         </nav>
 
-        <p className='text-gray4 text-center'>
+        <p className='text-gray200 text-center'>
           Copyright &copy; 2024 꿈빛파티시엘 All rights reserved.
         </p>
       </div>

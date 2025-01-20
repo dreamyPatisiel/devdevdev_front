@@ -23,15 +23,15 @@ export default function BorderRoundButton({
   disabled?: boolean;
   isActived: boolean;
 }) {
-  const defaultButtonClass = 'border border-[#677485] text-[#B8C3D2]';
-  const activeButtonClass = 'border border-[#40FF81] text-[#40FF81]';
-  const disabledButtonClass = 'border border-[#4B5766] text-[#4B5766]';
+  const defaultButtonClass = 'border border-gray300 text-gray100';
+  const activeButtonClass = 'border border-secondary400 text-secondary400';
+  const disabledButtonClass = 'border border-gray400 text-gray400';
 
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`flex items-center c1 font-bold px-[1.6rem] py-[0.7rem] rounded-[0.8rem] bg-[#1A1B23]
+      className={`flex items-center c1 font-bold px-[1.6rem] py-[0.7rem] rounded-[0.8rem] bg-gray600
         ${isActived ? activeButtonClass : disabled ? disabledButtonClass : defaultButtonClass} `}
     >
       <span className={`font-bold ${icon && 'mr-2'}`}>{text}</span>
@@ -61,7 +61,7 @@ export const LikeButton = ({
 
   const handleLikeButtonClick = () => {
     if (loginStatus === 'logout') {
-      setToastVisible('비회원은 현재 해당 기능을 이용할 수 없습니다.', 'error');
+      setToastVisible({ message: '비회원은 현재 해당 기능을 이용할 수 없습니다.', type: 'error' });
       return;
     }
     onClick?.();

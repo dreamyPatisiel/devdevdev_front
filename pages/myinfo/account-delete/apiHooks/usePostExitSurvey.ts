@@ -24,10 +24,10 @@ export const usePostExitSurvey = () => {
       const errorMessge = error.response.data.message;
 
       if (errorMessge == null) {
-        return setToastVisible(UNDEFINED_ERROR_MESSAGE, 'error');
+        return setToastVisible({ message: UNDEFINED_ERROR_MESSAGE, type: 'error' });
       }
 
-      return setToastVisible(errorMessge, 'error');
+      return setToastVisible({ message: errorMessge, type: 'error' });
     },
   });
 };

@@ -9,8 +9,10 @@ export type SuccessResponse<T> = {
 
 export const getKeyWordData = async (keyword: string) => {
   if (!keyword) return { datas: [] };
+  const encodedKeyword = encodeURIComponent(keyword);
+
   const res = await axios.get<SuccessResponse<string[]>>(
-    `/devdevdev/api/v1/keywords/auto-complete?prefix=${keyword}`,
+    `/devdevdev/api/v1/keywords/auto-complete?prefix=${encodedKeyword}`,
   );
   return res.data;
 };

@@ -76,7 +76,7 @@ export default function MarkdownEditor({
         )}
       />
 
-      <p className='text-right text-gray5 mt-[1.6rem] p2 font-light'>
+      <p className='text-right text-gray200 mt-[1.6rem] p2 font-light'>
         {content.length}/{MAX_LENGTH}
       </p>
     </>

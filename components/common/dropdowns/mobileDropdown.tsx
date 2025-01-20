@@ -12,6 +12,9 @@ import {
   useTechblogDropdownStore,
 } from '@stores/dropdownStore';
 
+import check_gray from '@public/image/check_gray.svg';
+import check_green from '@public/image/check_green.svg';
+import check_hover_gray from '@public/image/check_hover_gray.svg';
 import AngleDown from '@public/image/dropdown-angle-down.svg';
 
 import {
@@ -72,14 +75,14 @@ export default function MobileDropdown({
     setSort(value);
   };
 
-  const baseStyle = 'px-[2.4rem] py-[1.2rem] st2 text-gray4 cursor-pointer';
-  const activeStyle = 'text-point1 bg-gray2 rounded-[0.8rem]';
-  const nonActiveStyle = 'hover:text-gray5';
+  const baseStyle = 'px-[2.2rem] py-[1.2rem] st2 text-gray50 cursor-pointer flex justify-between';
+  const activeStyle = 'text-secondary400 rounded-[0.8rem]';
+  const nonActiveStyle = 'text-gray100 hover:text-gray50';
 
   return (
     <>
       <div
-        className='rounded-[10rem] px-[1.4rem] py-[0.8rem] bg-gray1 text-gray4 flex gap-[0.8rem] c1 font-bold cursor-pointer'
+        className='rounded-[10rem] px-[1.4rem] py-[0.8rem] bg-gray600 text-gray200 flex gap-[0.8rem] c1 font-bold cursor-pointer'
         onClick={() => setShowBottom(true)}
       >
         {dropdownOptionToKorean(selectedSortOption)}
@@ -88,7 +91,7 @@ export default function MobileDropdown({
 
       {showBottom ? (
         <BottomContainer onClose={() => setShowBottom(false)}>
-          <b className='st1 font-bold mb-[1.2rem]'>정렬</b>
+          <b className='st2 font-bold px-[2.2rem] pt-[2.8rem] pb-[1.6rem]'>정렬</b>
           <ul className='flex flex-col gap-[0.4rem]'>
             {dropdownOptions.map((option, index) => (
               <li
@@ -97,9 +100,19 @@ export default function MobileDropdown({
                 className={cn(
                   baseStyle,
                   selectedSortOption === option ? activeStyle : nonActiveStyle,
+                  'mobile-dropdown-item',
                 )}
               >
                 {dropdownOptionToKorean(option as DropdownOptionProps)}
+
+                {selectedSortOption === option ? (
+                  <Image src={check_green} alt='활성화된 체크표시' />
+                ) : (
+                  <>
+                    <Image src={check_gray} alt='비활성화된 체크표시' className='default' />
+                    <Image src={check_hover_gray} alt='비활성화된 체크표시' className='hover' />
+                  </>
+                )}
               </li>
             ))}
           </ul>

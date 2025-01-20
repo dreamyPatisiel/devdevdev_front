@@ -74,7 +74,7 @@ export function LoginModal() {
       >
         <div
           data-testid='login-modal'
-          className={`bg-gray1 border border-gray3 rounded-[1.6rem] px-[4.1rem] pt-[3.2rem] pb-[4.2rem] z-50 ${isMobile ? 'w-[34.2rem]' : 'w-[38.5rem]'}`}
+          className={`bg-gray600 border border-gray200 rounded-[1.6rem] px-[4.1rem] pt-[3.2rem] pb-[4.2rem] z-50 ${isMobile ? 'w-[34.2rem]' : 'w-[38.5rem]'}`}
           style={centerStyle}
         >
           <Image
@@ -84,7 +84,7 @@ export function LoginModal() {
           />
           <h1 className={`text-center mb-[2.6rem] font-bold ${isMobile ? 'st1' : 'h3'}`}>
             ✨ 3초만에 댑댑이 되기! ✨
-            <p className='p1 text-gray5 whitespace-pre-wrap'>{description}</p>
+            <p className='p1 text-gray100 whitespace-pre-wrap'>{description}</p>
           </h1>
 
           <LoginButton />
@@ -97,14 +97,11 @@ export function LoginModal() {
 export function LogoutModal({ handleLogout }: { handleLogout: () => void }) {
   const { closeLoginModal } = useLoginModalStore();
   const isMobile = useIsMobile();
-
-  const baseWrapperClass = 'text-white bg-gray1 border border-gray3 z-50';
-  const mobileWrapperClass = 'w-[29.5rem] rounded-[1.2rem] p-[2.4rem] border border-white';
+  const baseWrapperClass = 'text-white bg-gray600 z-50';
+  const mobileWrapperClass = 'w-[29.5rem] rounded-[1.2rem] p-[2.4rem]';
   const desktopWrapperClass = 'w-[38.5rem] rounded-[1.6rem] p-[3.1rem]';
 
-  const baseFontClass = 'text-center font-bold mb-[3.2rem]';
-  const mobileFontClass = 'st1';
-  const desktopFontClass = 'h3';
+  const baseFontClass = 'st1 text-center font-bold mb-[3.2rem]';
 
   return (
     <ModalAnimateContainer closeModal={closeLoginModal}>
@@ -113,10 +110,9 @@ export function LogoutModal({ handleLogout }: { handleLogout: () => void }) {
         className={`${baseWrapperClass} ${isMobile ? mobileWrapperClass : desktopWrapperClass}`}
         style={centerStyle}
       >
-        <p className={`${baseFontClass} ${isMobile ? mobileFontClass : desktopFontClass}`}>
-          로그아웃 할까요? 😢
-        </p>
+        <p className={`${baseFontClass}`}>로그아웃 할까요? 😢</p>
         <div className={`flex gap-[1.6rem] ${isMobile ? '' : 'p-4'} `}>
+          {/* TODO: 버튼 공통 컴포넌트로 교체하기 */}
           <LogoutButton text='취소' variant='gray' onClick={closeLoginModal} />
           <LogoutButton text='로그아웃' variant='primary' onClick={handleLogout} />
         </div>
@@ -185,7 +181,7 @@ export function Modal({
     >
       <div
         className={cn(
-          'bg-[#1A1B23] rounded-[1.6rem] z-50 shadow-[0_2px_10px_0_rgba(0,0,0,0.4)]',
+          'bg-gray600 rounded-[1.6rem] z-50 shadow-[0_2px_10px_0_rgba(0,0,0,0.4)]',
           isMobile ? 'p-[2.4rem]' : 'p-[3.2rem]',
           isMobile
             ? {
@@ -194,7 +190,7 @@ export function Modal({
               }
             : {
                 'w-[40rem]': size === 's',
-                'w-[56rem] min-w-[44rem]': size === 'm',
+                'max-w-[65rem] min-w-[44rem]': size === 'm',
                 'w-[80rem]': size === 'l',
               },
         )}
@@ -202,15 +198,14 @@ export function Modal({
       >
         <div className={`flex flex-col text-center`}>
           <h3
-            className={`font-bold text-white 
-              ${titleCenter ? 'text-center' : ''} 
-              ${isMobile ? 'st1' : 'h3'}`}
+            className={`font-bold text-white st1
+              ${titleCenter ? 'text-center' : ''}`}
           >
             {title}
           </h3>
           {contents && (
             <p
-              className={`text-gray5 whitespace-pre-wrap mt-[0.8rem]
+              className={`text-gray200 whitespace-pre-wrap mt-[0.8rem]
             ${isMobile ? 'p2' : 'p1'}`}
             >
               {contents}

@@ -31,19 +31,19 @@ export const usePostCommentRecommend = () => {
       await queryClient.invalidateQueries({ queryKey: ['getBestComments'] });
 
       if (success.data.isRecommended) {
-        return setToastVisible('댓글을 추천했어요!');
+        return setToastVisible({ message: '댓글을 추천했어요!' });
       }
 
-      setToastVisible('댓글 추천을 취소했어요!');
+      setToastVisible({ message: '댓글 추천을 취소했어요!' });
     },
     onError: (error: ErrorRespone) => {
       const errorMessage = error.response.data.message;
 
       if (errorMessage == null) {
-        return setToastVisible(UNDEFINED_ERROR_MESSAGE, 'error');
+        return setToastVisible({ message: UNDEFINED_ERROR_MESSAGE, type: 'error' });
       }
 
-      return setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };

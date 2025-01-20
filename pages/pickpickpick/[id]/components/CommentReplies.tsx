@@ -38,7 +38,7 @@ export default function CommentReplies({ replies, pickId, isBestComment }: Comme
     <>
       <div
         className={`${
-          replies.length !== 0 && !showDefaultComments ? 'border-b-[0.1rem] border-b-gray3' : ''
+          replies.length !== 0 && !showDefaultComments ? 'border-b-[0.1rem] border-b-gray400' : ''
         }`}
       >
         <CommentRepliesButton

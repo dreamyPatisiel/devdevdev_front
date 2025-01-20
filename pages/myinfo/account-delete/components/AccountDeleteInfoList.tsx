@@ -5,9 +5,9 @@ export interface AccountDeleteInfoListProps {
 
 export default function AccountDeleteInfoList({ content, type }: AccountDeleteInfoListProps) {
   return (
-    <li className='p1 font-light text-gray5 list-disc'>
+    <li className='p1 font-light text-gray100 list-disc'>
       {content}
-      <span className='text-point1'>
+      <span className='text-secondary400'>
         {type === 'delete' && ' 삭제'}
         {type === 'keep' && ' 유지'}
       </span>

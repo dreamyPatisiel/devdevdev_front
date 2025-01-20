@@ -23,7 +23,7 @@ export const useDeletePick = () => {
   return useMutation({
     mutationFn: deletePick,
     onSuccess: () => {
-      setToastVisible('투표를 성공적으로 삭제했어요.');
+      setToastVisible({ message: '투표를 성공적으로 삭제했어요.' });
       router.push('/pickpickpick');
       queryClient.invalidateQueries({ queryKey: ['pickData'] });
       queryClient.invalidateQueries({ queryKey: ['myPicksData'] });
@@ -32,10 +32,10 @@ export const useDeletePick = () => {
       const errorMessage = error.response.data.message;
 
       if (errorMessage == null) {
-        return setToastVisible(UNDEFINED_ERROR_MESSAGE, 'error');
+        return setToastVisible({ message: UNDEFINED_ERROR_MESSAGE, type: 'error' });
       }
 
-      return setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };

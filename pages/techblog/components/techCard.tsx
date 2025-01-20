@@ -61,7 +61,7 @@ export default function TechCard({
           </Link>
 
           {type !== 'main' && (
-            <div className='flex flex-row items-center relative'>
+            <div className='flex flex-row items-center relative flex-shrink-0'>
               <Tooltip variant='grayTt' direction='right' isVisible={tooltipMessage !== ''}>
                 {tooltipMessage}
               </Tooltip>

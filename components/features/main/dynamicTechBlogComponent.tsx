@@ -55,7 +55,7 @@ export default function DynamicTechBlogComponent({
 
       default:
         if (type === 'myinfo' && techBlogData?.pages[0].data.content.length === 0)
-          return <NoMyInfoData type='techblog' />;
+          return <NoMyInfoData type='noMyTech' />;
         return (
           <>
             <div className={isScroll ? SCROLL_CLASS : ''}>

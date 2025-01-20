@@ -37,7 +37,7 @@ export default function CheckReasonBox({ id, reason, content }: CheckReasonBoxPr
   return (
     <label
       htmlFor={id}
-      className={`border border-gray2 rounded-[1.2rem] p-[2.4rem] ${checked && 'border-point1 bg-gray1'} cursor-pointer select-none`}
+      className={`border border-gray500 rounded-[1.2rem] p-[2.4rem] ${checked && 'border-secondary400 bg-black'} cursor-pointer select-none`}
     >
       <input
         type='checkbox'
@@ -45,7 +45,7 @@ export default function CheckReasonBox({ id, reason, content }: CheckReasonBoxPr
         onChange={() => setChecked((prevChecked) => !prevChecked)}
         className='hidden'
       />
-      <span className={`p1 text-gray4 flex gap-[1.6rem] ${checked && 'text-white'} `}>
+      <span className={`p1 text-gray200 flex gap-[1.6rem] ${checked && 'text-white'} `}>
         {checked ? (
           <Image src={checkCircle} alt='체크된 체크박스' />
         ) : (
@@ -57,7 +57,7 @@ export default function CheckReasonBox({ id, reason, content }: CheckReasonBoxPr
         <>
           <textarea
             placeholder={content}
-            className='bg-black p-[2.4rem] w-full rounded-[1.2rem] resize-none outline-none p2 placeholder:text-gray4 mt-[2.4rem]'
+            className='bg-black p-[2.4rem] w-full rounded-[1.2rem] resize-none outline-none p2 placeholder:text-gray300 mt-[2.4rem]'
             onChange={(e) => setCheckedSurveyList(id, isContent, e.target.value)}
             defaultValue={message}
           />

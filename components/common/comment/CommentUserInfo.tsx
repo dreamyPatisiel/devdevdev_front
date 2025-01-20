@@ -1,8 +1,9 @@
-import { useLoginStatusStore } from '@stores/loginStore';
-import { useUserInfoStore } from '@stores/userInfoStore';
 import { cn } from '@utils/mergeStyle';
 
-export default function CommentUserInfo({className}:{className?:string}) {
+import { useLoginStatusStore } from '@stores/loginStore';
+import { useUserInfoStore } from '@stores/userInfoStore';
+
+export default function CommentUserInfo({ className }: { className?: string }) {
   const { userInfo } = useUserInfoStore();
 
   const { loginStatus } = useLoginStatusStore();
@@ -11,12 +12,12 @@ export default function CommentUserInfo({className}:{className?:string}) {
     <section className={cn('p1 mt-[4rem] ml-4', className)}>
       {loginStatus === 'login' ? (
         <p>
-          <span className='text-point3 font-bold'>{userInfo?.nickname || ''}</span>님 의견을
+          <span className='text-secondary500 font-bold'>{userInfo?.nickname || ''}</span>님 의견을
           남겨주세요!
         </p>
       ) : (
         <p>
-          <span className='text-point3'>로그인</span> 후 의견을 남겨주세요!
+          <span className='text-secondary500'>로그인</span> 후 의견을 남겨주세요!
         </p>
       )}
     </section>

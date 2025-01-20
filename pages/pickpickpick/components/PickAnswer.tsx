@@ -10,8 +10,8 @@ export default function PickAnswer({
   className,
 }: PickOptionsProps) {
   const pickAnswerStyle = {
-    backgroundImage: `linear-gradient(to right, var(--primary-2) ${percent}%, transparent 0%)`,
-    borderColor: 'var(--primary-2)',
+    backgroundImage: `linear-gradient(to right, var(--primary400) ${percent}%, transparent 0%)`,
+    borderColor: 'var(--primary400)',
   };
 
   const unpickAnswerStyle = {
@@ -21,7 +21,7 @@ export default function PickAnswer({
   return (
     <li
       className={twMerge(
-        `rounded-[1.6rem] border-gray2 border-solid border p-[2rem] flex items-center gap-[2.4rem] ${className}`,
+        `rounded-[1.6rem] border-gray400 border-solid border p-[2rem] flex items-center gap-[2.4rem] ${className}`,
       )}
       style={isVoted && isPicked ? pickAnswerStyle : isVoted && !isPicked ? unpickAnswerStyle : {}}
     >

@@ -17,11 +17,13 @@ export default function SelectedPick({ votedPickOption, votedPickOptionTitle }: 
 
   return (
     <div
-      className={`bg-[#151721] rounded-[1.2rem] p-[1.6rem] flex 
-        ${isMobile ? 'flex-col gap-[0.8rem]' : 'gap-[2.4rem]'}`}
+      className={`bg-gray700 rounded-[1.2rem] px-[1.6rem] py-[0.8rem] flex items-center
+        ${isMobile ? 'gap-[1.6rem]' : 'gap-[2.4rem]'}`}
     >
-      <span className='p2 text-[#94A0B0] font-bold'>{renderPickOption(votedPickOption)}</span>
-      <span className='p2 text-primary3 font-bold'>{votedPickOptionTitle}</span>
+      <span className='p2 text-gray200 font-bold whitespace-nowrap'>
+        {renderPickOption(votedPickOption)}
+      </span>
+      <span className='p2 text-primary200 font-bold'>{votedPickOptionTitle}</span>
     </div>
   );
 }

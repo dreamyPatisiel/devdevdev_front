@@ -12,7 +12,7 @@ interface SimilarPickProps {
 
 export default function SimilarPick({ data }: SimilarPickProps) {
   return (
-    <div className='rounded-[1.6rem] border-gray3 border px-[2.4rem] py-[3.2rem] bg-gray1 h-[17.1rem] flex flex-col justify-between'>
+    <div className='rounded-[1.6rem] px-[2.4rem] py-[3.2rem] bg-gray600 h-[17.1rem] flex flex-col justify-between'>
       <ArrowWithTitle variant={'similarPick'} title={data.title} className='ellipsis' />
 
       <div className='mt-[3.2rem] flex items-center gap-8 flex-wrap'>
@@ -21,14 +21,14 @@ export default function SimilarPick({ data }: SimilarPickProps) {
           alt='투표 이미지'
           text='투표'
           count={data.voteTotalCount}
-          textColor='text-primary3'
+          textColor='text-primary200'
         />
         <StatisticsItem
           icon={PurpleComment}
           alt='댓글 이미지'
           text='댓글'
           count={data.commentTotalCount}
-          textColor='text-primary3'
+          textColor='text-primary200'
         />
       </div>
     </div>

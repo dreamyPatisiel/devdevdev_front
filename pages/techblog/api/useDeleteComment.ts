@@ -22,20 +22,22 @@ export const deleteComment = async ({
   return res.data;
 };
 
-export const useDeleteComment = () => {
+export const useDeleteTechComment = () => {
   const queryClient = useQueryClient();
   const { setToastVisible } = useToastVisibleStore();
   const { closeModal } = useModalStore();
+
   return useMutation({
     mutationFn: deleteComment,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['techBlogComments'] });
       await queryClient.invalidateQueries({ queryKey: ['getBestTechComments'] });
       closeModal();
+      setToastVisible({ message: '댓글을 삭제했어요!' });
     },
     onError: (error: ErrorRespone) => {
       const errorMessage = error.response.data.message;
-      setToastVisible(errorMessage, 'error');
+      return setToastVisible({ message: errorMessage, type: 'error' });
     },
   });
 };

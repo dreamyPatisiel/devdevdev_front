@@ -8,7 +8,7 @@ interface ShowMoreCommentsButtonProps {
 
 export default function ShowMoreCommentsButton({ onClick }: ShowMoreCommentsButtonProps) {
   const isMobile = useIsMobile();
-  const defaultStyle = 'w-full p2 font-bold bg-[#0D0E11] text-[#00D649] text-left';
+  const defaultStyle = 'w-full p2 font-bold bg-gray800 text-secondary500 text-left';
   const mobileStyle = 'pb-[1.6rem] px-[1.6rem]';
   const desktopStyle = 'pb-[3.2rem] px-[3.2rem]';
   return (

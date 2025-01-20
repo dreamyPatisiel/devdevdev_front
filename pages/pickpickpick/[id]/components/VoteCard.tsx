@@ -30,7 +30,7 @@ export default function VoteCard({
       className={`flex pb-[1.6rem] min-h-[12.2rem] ${isMobile ? 'flex-col gap-[2.4rem]' : 'p-[4rem] gap-[4rem]'}`}
     >
       <div
-        className={` py-[1.6rem] rounded-[1.6rem] border border-gray3 flex flex-col w-full overflow-hidden justify-center ${isMobile ? 'px-[2.4rem]' : 'px-[4rem]'}`}
+        className={` py-[1.6rem] rounded-[1.6rem] border border-gray300 flex flex-col w-full overflow-hidden justify-center ${isMobile ? 'px-[2.4rem]' : 'px-[4rem]'}`}
       >
         <p className='py-[2.4rem] pb-[3.2rem] text-st1 leading-[2.8rem] font-semibold '>
           {pickDetailOptionData?.title}
@@ -38,7 +38,7 @@ export default function VoteCard({
 
         {(pickDetailOptionData?.content ||
           pickDetailOptionData?.pickDetailOptionImages.length !== 0) && (
-          <div className='border-t-[0.1rem] border-t-gray1 pt-[2.4rem] flex flex-col gap-[2.4rem]'>
+          <div className='border-t-[0.1rem] border-t-gray600 pt-[2.4rem] flex flex-col gap-[2.4rem]'>
             <div
               className={`${
                 isFullContents
@@ -51,7 +51,7 @@ export default function VoteCard({
                 <MarkdownViewer pickDetailOptionContents={pickDetailOptionData?.content} />
 
                 {pickDetailOptionData?.pickDetailOptionImages.length !== 0 && (
-                  <p className='p2 font-light text-gray5 py-[2.4rem]'>첨부 이미지</p>
+                  <p className='p2 font-light text-gray200 py-[2.4rem]'>첨부 이미지</p>
                 )}
                 <div className='flex flex-col gap-[2.4rem]'>
                   {pickDetailOptionData?.pickDetailOptionImages?.map((optionImage) => (
@@ -67,7 +67,7 @@ export default function VoteCard({
             </div>
 
             <button
-              className={`p2 font-bold text-point1 flex items-center gap-[0.8rem] justify-center`}
+              className={`p2 font-bold text-secondary400 flex items-center gap-[0.8rem] justify-center`}
               onClick={handleFullContents}
             >
               {isFullContents ? (

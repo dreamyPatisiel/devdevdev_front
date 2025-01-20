@@ -8,7 +8,7 @@ export function ValidationMessage({ message, className }: { message: string; cla
   return (
     <div className={cn(`flex items-center gap-[1rem] mt-[0.8rem] py-[1rem]`, className)}>
       <Image src={ExclamationCircle} alt='주의 아이콘' />
-      <span className='p2 text-point1'>{message}</span>
+      <span className='p2 text-secondary400'>{message}</span>
     </div>
   );
 }

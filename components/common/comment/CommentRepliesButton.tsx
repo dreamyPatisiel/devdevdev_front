@@ -22,7 +22,7 @@ const CommentRepliesButton = ({
   if (repliesCount === 0) return null;
 
   const defaultStyle =
-    'w-full flex items-center gap-3 p2 font-bold text-point1 bg-[#0D0E11] py-[1.6rem]';
+    'w-full flex items-center gap-3 p2 font-bold text-secondary400 bg-gray800 py-[1.6rem]';
   const mobileStyle = 'pl-[1.6rem]';
   const desktopStyle = 'pl-[3.2rem]';
 
